@@ -3,11 +3,12 @@ package models
 import "github.com/go-pg/pg/v9"
 
 type Vacancy struct {
-	ID           int    `pg:"id,pk"`        //id
-	Position     string `pg:"position" json:"position"`     //Должность
-	Charge       string `pg:"charge" json:"charge"`       //Обязанность
+	ID           int    `pg:"id,pk"`
+	UUID         string    `pg:"uuid,unique" json:"uuid"`
+	Position     string `pg:"position" json:"position"`         //Должность
+	Charge       string `pg:"charge" json:"charge"`             //Обязанность
 	Requirements string `pg:"requirements" json:"requirements"` //Требования
-	Conditions   string `pg:"conditions" json:"conditions"`   //Условия работы
+	Conditions   string `pg:"conditions" json:"conditions"`     //Условия работы
 }
 
 func (vac *Vacancy) Create(conn *pg.DB) error {

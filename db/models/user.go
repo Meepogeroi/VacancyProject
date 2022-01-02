@@ -4,12 +4,13 @@ import "github.com/go-pg/pg/v9"
 
 type User struct {
 	ID       int    `pg:"id,pk"`
+	UUID     string `pg:"uuid,unique" json:"uuid"`
 	FIO      string `pg:"fio" json:"fio"`
 	Mail     string `pg:"mail, unique" json:"mail"`
 	PhoneNum string `pg:"phone_num" json:"phone_num"`
 	Password string `pg:"password" json:"password"`
-	CV       []byte `pg:"cv" json:"cv"` //Резюме, я не знаю как файл загрузить в бд, поэтому оставил массив байт
-	WorkExp  string `pg:"work_exp" json:"work_exp"`
+	CV       []byte `pg:"cv" json:"cv"`
+	WorkExp  int    `pg:"work_exp" json:"work_exp"`
 }
 
 func (usr *User) CreateUser(conn *pg.DB) error {
